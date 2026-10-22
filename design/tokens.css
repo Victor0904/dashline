@@ -1,0 +1,221 @@
+/* DASHLINE — Design tokens (écrans DOM + HUD canvas).
+   Le HUD et le rendu canvas lisent ces variables au démarrage via
+   getComputedStyle(document.documentElement) puis les mettent en cache.
+   Aucune ressource externe : polices système uniquement.
+   Règle d'or : la famille --c-danger-* est RÉSERVÉE aux menaces vivantes. */
+
+:root {
+  color-scheme: dark;
+
+  /* ---------- Encre (fonds) ---------- */
+  --c-ink-0: #07090D;          /* fond page, letterbox, manifest theme/background */
+  --c-ink-1: #0D1118;          /* panneaux, HUD, pad de tracé */
+  --c-ink-2: #151B26;          /* cartes, boutons secondaires */
+  --c-ink-3: #1F2836;          /* pressé, pistes de barres */
+  --c-scrim: rgba(7, 9, 13, 0.80);
+  --c-line: rgba(170, 190, 220, 0.16);
+  --c-line-strong: rgba(170, 190, 220, 0.34);
+
+  /* ---------- Joueur (allié) ---------- */
+  --c-volt: #D7FF3A;           /* trait, Élan, Chaîne, bouton principal */
+  --c-volt-soft: #ECFF9E;
+  --c-volt-deep: #7A9A00;
+  --c-white: #FFFFFF;          /* cœur du trait, point du joueur, ennemi tranché */
+  --c-volt-cb: #3DE0FF;        /* remplace --c-volt en contraste daltonien */
+
+  /* ---------- Danger (réservé aux menaces vivantes) ---------- */
+  --c-danger: #FF2D55;         /* contours ennemis, perles, couloirs, viseurs */
+  --c-danger-hot: #FF7A1A;     /* attaques lourdes (mortier, colosse, presse, lancier) */
+  --c-danger-fill: #3A0812;    /* corps ennemis (alpha .9) */
+  --c-danger-tele: rgba(255, 45, 85, 0.16); /* aplat des télégraphes */
+
+  /* ---------- Neutre & ressources ---------- */
+  --c-steel: #C9D6E8;          /* boucliers, bulles, volets : bloque sans blesser */
+  --c-steel-dim: #6F8099;
+  --c-glass: #8FD8FF;          /* vitres */
+  --c-xp: #8EA2FF;
+  --c-tesson: #B78CFF;         /* monnaie ◇ */
+  --c-gold: #FFC53D;           /* évolutions, records, alertes UI (jamais de rouge en UI) */
+
+  /* Raretés de cartes */
+  --c-rar-common: #9AA6B8;
+  --c-rar-rare: #4DA3FF;
+  --c-rar-epic: #B57BFF;
+  --c-rar-evo: #FFC53D;
+
+  /* Couleurs de palier du multiplicateur (×1 → ×8) */
+  --c-tier-1: #586273;
+  --c-tier-2: #EEF2F8;
+  --c-tier-3: #ECFF9E;
+  --c-tier-4: #D7FF3A;
+  --c-tier-5: #9BFF5A;
+  --c-tier-6: #5AFFC8;
+  --c-tier-7: #8EA2FF;
+  --c-tier-8: #FFFFFF;
+
+  /* ---------- Zones (aplats d'arène) ---------- */
+  --c-z1-floor: #0C1A1C;  --c-z1-grid: #132A2D;  --c-z1-wall: #1A2A2E;  --c-z1-edge: #3C5A5E;  /* Dojo */
+  --c-z2-floor: #0E1022;  --c-z2-grid: #1A1D3A;  --c-z2-wall: #1C2140;  --c-z2-edge: #3E4778;  /* Docks */
+  --c-z3-floor: #170E1B;  --c-z3-grid: #27182D;  --c-z3-wall: #2A1A30;  --c-z3-edge: #5A3A66;  /* Verrière */
+  --c-z4-floor: #050506;  --c-z4-grid: #141416;  --c-z4-wall: #121214;  --c-z4-edge: #3A3A40;  /* Vide */
+  --c-pit: #000000;
+  --c-pit-edge: #2A3346;
+
+  /* ---------- Texte ---------- */
+  --c-text-hi: #EEF2F8;
+  --c-text-mid: #9AA6B8;
+  --c-text-lo: #586273;
+  --c-text-on-volt: #07090D;
+
+  /* ---------- Typo (système) ---------- */
+  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-num: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Roboto Mono", monospace;
+  --fs-xxs: 10px;              /* minimum absolu */
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 20px;
+  --fs-xl: 28px;
+  --fs-xxl: 40px;
+  --fs-tier: 48px;             /* gros chiffre de palier (×4) */
+  --fs-title: 52px;
+  --fw-regular: 500;
+  --fw-bold: 800;
+  --ls-caps: 0.12em;
+  --ls-title: 0.26em;
+
+  /* ---------- Espacement / formes ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --radius-s: 4px;
+  --radius-m: 12px;
+  --radius-l: 18px;
+  --radius-pill: 999px;
+  --border-w: 1.5px;
+  --skew-title: -8deg;         /* logo et titres en italique « coupé » */
+
+  /* ---------- Cibles tactiles ---------- */
+  --tap-min: 48px;
+  --btn-h: 56px;
+  --btn-primary-h: 68px;       /* JOUER / REJOUER / REPRENDRE */
+  --btn-icon: 48px;
+  --btn-pause-hit: 56px;
+  --card-w: 108px;             /* carte de niveau (360 px de large) */
+  --card-h: 196px;
+  --card-w-lg: 128px;          /* ≥ 412 px de large */
+  --card-h-lg: 220px;
+
+  /* ---------- Mise en page de jeu (unités logiques u, cf. GAME_DESIGN §1) ---------- */
+  --u-arena-w: 360;
+  --u-arena-h: 480;
+  --u-hud-h: 52;
+  --u-pad-min: 80;
+  --hud-margin: 12px;
+
+  /* ---------- Safe areas ---------- */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+
+  /* ---------- Mouvement ---------- */
+  --dur-fast: 120ms;
+  --dur-ui: 160ms;
+  --dur-card-in: 180ms;
+  --ease-out: cubic-bezier(.2, .9, .25, 1);
+  --ease-snap: cubic-bezier(.5, 1.6, .4, 1);
+  --press-scale: 0.96;
+
+  /* ---------- Lueurs (DOM uniquement ; le canvas utilise des sprites pré-rendus) ---------- */
+  --glow-volt: 0 0 4px rgba(215, 255, 58, 0.85), 0 0 14px rgba(215, 255, 58, 0.40);
+  --glow-gold: 0 0 4px rgba(255, 197, 61, 0.85), 0 0 14px rgba(255, 197, 61, 0.40);
+}
+
+/* Contraste daltonien : posé par le jeu (<html data-cb="1">) */
+:root[data-cb="1"] {
+  --c-volt: #3DE0FF;
+  --c-volt-soft: #A8F0FF;
+  --c-volt-deep: #0A6F88;
+  --c-tier-3: #A8F0FF;
+  --c-tier-4: #3DE0FF;
+  --c-tier-5: #4DA3FF;
+  --c-tier-6: #8EA2FF;
+  --c-tier-7: #C9D6E8;
+  --glow-volt: 0 0 4px rgba(61, 224, 255, 0.85), 0 0 14px rgba(61, 224, 255, 0.40);
+}
+
+/* Mouvements réduits (système) ; le réglage « Oui/Non » pose <html data-rm="1|0"> qui prime */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-rm="0"]) { --dur-ui: 0ms; --dur-card-in: 0ms; --press-scale: 1; }
+}
+:root[data-rm="1"] { --dur-ui: 0ms; --dur-card-in: 0ms; --press-scale: 1; }
+
+/* ---------- Base ---------- */
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--c-ink-0);
+  color: var(--c-text-hi);
+  font-family: var(--font-ui);
+  font-weight: var(--fw-regular);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  overscroll-behavior: none;
+  touch-action: none;
+}
+
+/* ---------- Composants de référence ---------- */
+.btn {
+  min-height: var(--btn-h);
+  min-width: var(--tap-min);
+  padding: 0 var(--sp-4);
+  border-radius: var(--radius-m);
+  border: var(--border-w) solid var(--c-line-strong);
+  background: var(--c-ink-2);
+  color: var(--c-text-hi);
+  font: var(--fw-bold) var(--fs-sm)/1 var(--font-ui);
+  letter-spacing: var(--ls-caps);
+  text-transform: uppercase;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.btn:active { transform: scale(var(--press-scale)); background: var(--c-ink-3); }
+.btn--primary {
+  min-height: var(--btn-primary-h);
+  background: var(--c-volt);
+  border-color: var(--c-volt);
+  color: var(--c-text-on-volt);
+  font-size: var(--fs-lg);
+  box-shadow: var(--glow-volt);
+}
+.btn--price-ok { border-color: var(--c-volt); color: var(--c-volt); }
+.btn--price-ko { color: var(--c-text-lo); }
+.badge { /* pastille « ! » ou compteur */
+  min-width: 18px; height: 18px; border-radius: var(--radius-pill);
+  background: var(--c-gold); color: var(--c-ink-0);
+  font: var(--fw-bold) var(--fs-xxs)/18px var(--font-num); text-align: center;
+}
+.title {
+  font: var(--fw-bold) var(--fs-title)/1 var(--font-ui);
+  letter-spacing: var(--ls-title);
+  font-style: italic;
+  transform: skewX(var(--skew-title));
+}
+.caps { font-size: var(--fs-xs); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--c-text-mid); }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+.tesson { color: var(--c-tesson); }
+.card {
+  width: var(--card-w); height: var(--card-h);
+  border-radius: var(--radius-m);
+  background: var(--c-ink-2);
+  border: 2px solid var(--c-rar-common);
+}
+.card[data-rar="rare"] { border-color: var(--c-rar-rare); }
+.card[data-rar="epic"] { border-color: var(--c-rar-epic); }
+.card[data-rar="evo"]  { border-color: var(--c-rar-evo); box-shadow: var(--glow-gold); }
+@media (min-width: 412px) { .card { width: var(--card-w-lg); height: var(--card-h-lg); } }

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>DASHLINE</title>
+  <!-- Icône DASHLINE : un trait Volt fend une cible carmin en deux.
+       Maskable : tout le motif utile tient dans le cercle central de 80 % (r 205). -->
+  <defs>
+    <radialGradient id="floor" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0" stop-color="#132A2D"/>
+      <stop offset="0.6" stop-color="#0C1A1C"/>
+      <stop offset="1" stop-color="#07090D"/>
+    </radialGradient>
+    <linearGradient id="stroke" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#D7FF3A" stop-opacity="0"/>
+      <stop offset="0.35" stop-color="#D7FF3A" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ECFF9E"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowR" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- demi-plans de part et d'autre du trait (droite y = 512 - x, orientée bas-gauche → haut-droite) -->
+    <clipPath id="halfA"><polygon points="0,0 512,0 0,512"/></clipPath>
+    <clipPath id="halfB"><polygon points="512,0 512,512 0,512"/></clipPath>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#floor)"/>
+  <!-- grille de tatami -->
+  <g stroke="#132A2D" stroke-width="2" opacity="0.9">
+    <path d="M136 0V512M256 0V512M376 0V512M0 136H512M0 256H512M0 376H512"/>
+  </g>
+
+  <!-- cible carmin fendue : moitié haute-gauche décalée vers le haut-gauche, moitié basse-droite vers le bas-droite -->
+  <g filter="url(#glowR)">
+    <g clip-path="url(#halfA)" transform="translate(-14,-14)">
+      <polygon points="256,150 362,256 256,362 150,256" fill="#3A0812" stroke="#FF2D55" stroke-width="12" stroke-linejoin="miter"/>
+    </g>
+    <g clip-path="url(#halfB)" transform="translate(14,14)">
+      <polygon points="256,150 362,256 256,362 150,256" fill="#3A0812" stroke="#FF2D55" stroke-width="12" stroke-linejoin="miter"/>
+    </g>
+  </g>
+  <!-- œil blanc de la cible, lui aussi coupé -->
+  <circle cx="236" cy="236" r="9" fill="#FFFFFF" clip-path="url(#halfA)" transform="translate(-14,-14)"/>
+
+  <!-- le trait : pinceau effilé (fin en bas-gauche, épais en haut-droite) -->
+  <g filter="url(#glow)">
+    <polygon points="92,420 368,130 392,154 104,432" fill="url(#stroke)"/>
+    <polygon points="118,404 374,138 384,148 126,412" fill="#FFFFFF"/>
+    <!-- fibres d'encre -->
+    <path d="M140 408 L330 210" stroke="#ECFF9E" stroke-width="3" opacity="0.5"/>
+    <path d="M120 380 L300 192" stroke="#ECFF9E" stroke-width="2" opacity="0.35"/>
+  </g>
+
+  <!-- le joueur : chevron à la tête du trait -->
+  <g transform="translate(380,142) rotate(-45)" filter="url(#glow)">
+    <polygon points="30,0 -21,21 -9,0 -21,-21" fill="#FFFFFF" stroke="#D7FF3A" stroke-width="7" stroke-linejoin="miter"/>
+  </g>
+
+  <!-- fente blanche sur la cible -->
+  <path d="M170 342 L342 170" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+</svg>
